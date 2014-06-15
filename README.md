@@ -140,6 +140,8 @@ For one solution just set the filename then use the singleton
 ```
 * **BuildScript** gives you paths about script directory and hepls you manage temporary build folders for projects (useful when creating nuget packs, copying things etc).
 
+##Example
+
 Here's how Make# nuget pack generation is implemented (using predefined helpers)
 
 ```csharp
@@ -147,13 +149,32 @@ Here's how Make# nuget pack generation is implemented (using predefined helpers)
 [Depends("build")]
 public class pack
 {
-   	
-	public void Run()	
+    public ITaskContext Context {get;set;}
+
+    
+    public void Run()	
     {
-       var nuspec = BuildScript.GetNuspecFile(Project.Current.Name);
+       
+        var nuspec = BuildScript.GetNuspecFile(Project.Current.Name);
         nuspec.Metadata.Version = Project.Current.GetAssemblySemanticVersion();
         var tempDir = BuildScript.GetProjectTempDirectory(Project.Current);
-        nuspec.Save(tempDir).CreateNuget(Solution.Instance.Directory,tempDir);        
+        var nupkg=nuspec.Save(tempDir).CreateNuget(Solution.Instance.Directory,tempDir);
+        Context.Data["pack"] = nupkg;
+    }
+}
+
+
+[Depends("pack")]
+public class push
+{
+    public ITaskContext Context { get; set; }
+
+    
+    public void Run()
+    {
+        var nupkg=Context.Data.GetValue<string>("pack");
+     
+        BuildScript.NugetExePath.Exec("push", nupkg);
     }
 }
 ```
