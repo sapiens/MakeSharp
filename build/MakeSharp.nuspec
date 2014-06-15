@@ -11,7 +11,7 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>MakeSharp - Make# - is a straightforward build automation tool for .Net using C# scripts. It's designed to be used in an object oriented manner allowing you to create advanced and maintainable build logic </description>
     <language>en-US</language>
-    <tags>make build makesharp script cs</tags>
+    <tags>make build makesharp scriptcs</tags>
  	</metadata>
 <files>
         <file src="MakeSharp\bin\Release\**\*" target="tools"></file>        
