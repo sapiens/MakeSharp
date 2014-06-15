@@ -12,7 +12,7 @@ In Make# any defined type can be a task. I took the decision to use clases inste
 While a lot of build scripts are simple enough (a few lines of code) for other you need a bit more structure. And if you're already a C# dev, you can use your C# and OOP knowledge to code maintainable build scripts.
 You can put all tasks in one file or each in its own file and then reference those in the main script. I'd say that if you're dealing with simple scripts use [CSake](https://github.com/sapiens/csake) for advanced scripts use Make# .
 
-The default convention is that any public class is a task. Each task has an entry point, a method with no arguments named "Run". If you wnt to define public utility classes (but not tasks) the convention is to end their name with an underscore e.g Utils_ . You can use your custom convention like this.
+The default convention is that any public class is a task. Each task has an entry point, a method with no arguments named "Run". If you wnt to define public utility classes (but not tasks) the convention is to end their name with an underscore e.g Utils_ . You can override this and use your custom convention.
 
 ```csharp
 
@@ -102,7 +102,7 @@ public class MyTask
 ```
 
 
-You can have use very own implementation of _IScriptParams_ . Just define it in the script and Make# will use it automatically.
+You can use your very own implementation of _IScriptParams_ . Just define it in the script and Make# will use it automatically.
 
 ```csharp
 
