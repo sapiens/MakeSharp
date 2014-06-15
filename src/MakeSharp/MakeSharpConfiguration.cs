@@ -8,7 +8,7 @@ namespace MakeSharp
     public class MakeSharpConfiguration:IConfigureMakeSharp
     {
         private Func<MethodInfo, bool> _matchMethod=m=>m.Name=="Run";
-        private Func<Type, bool> _matchType=t=> !t.IsAbstract && t.IsClass && t.IsNestedPublic;
+        private Func<Type, bool> _matchType=t=> !t.IsAbstract && t.IsClass && t.IsNestedPublic && !t.Name.EndsWith("_");
 
         public MakeSharpConfiguration()
         {

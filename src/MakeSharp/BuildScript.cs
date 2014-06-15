@@ -10,7 +10,8 @@ namespace MakeSharp
             get { return Environment.CurrentDirectory; }
         }
 
-     
+       public static string NugetExePath=@"..\src\.nuget\nuget.exe";
+
         public static string TempDirectory
         {
             get { return Path.Combine(Directory,TempDirName); }
@@ -44,6 +45,16 @@ namespace MakeSharp
         {
             return Path.Combine(TempDirectory, project.Name);
         }
+
+        ///// <summary>
+        ///// Creates a nuget pack dir in the temporary project directory
+        ///// </summary>
+        ///// <param name="project"></param>
+        ///// <returns></returns>
+        //public static string CreatePackageDir(Project project)
+        //{
+        //    var path=Path.Combine(GetProjectTempDirectory(pro))
+        //}
 
         //public static string PackageDir = @"temp/package";
     }

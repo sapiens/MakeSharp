@@ -187,7 +187,14 @@ namespace MakeSharp
             return new CavemanTools.SemanticVersion(version, preRelease, build);
         }
 
-        public static void CreateNuget(this string file, string basePath, string outputDir)
+        /// <summary>
+        /// Creates nuget package and returns the nupkg file path
+        /// </summary>
+        /// <param name="file"></param>
+        /// <param name="basePath"></param>
+        /// <param name="outputDir"></param>
+        /// <returns></returns>
+        public static string CreateNuget(this string file, string basePath, string outputDir)
         {
             "Creating nuget package from '{0}'".ToConsole(file);
             if (outputDir.IsNullOrEmpty())
@@ -213,6 +220,7 @@ namespace MakeSharp
 
             }
             "Package '{0}' was successfuly created".WriteInfo(nugetFile);
+            return nugetFile;
         }
     }
 

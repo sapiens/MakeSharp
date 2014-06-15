@@ -2,5 +2,5 @@
 
 namespace MakeSharp
 {
-    public class DefaultAttribute : Attribute { }
+    public class DefaultAttribute : Attribute { }    
 }

@@ -12,11 +12,11 @@ In Make# any defined type can be a task. I took the decision to use clases inste
 While a lot of build scripts are simple enough (a few lines of code) for other you need a bit more structure. And if you're already a C# dev, you can use your C# and OOP knowledge to code maintainable build scripts.
 You can put all tasks in one file or each in its own file and then reference those in the main script. I'd say that if you're dealing with simple scripts use [CSake](https://github.com/sapiens/csake) for advanced scripts use Make# .
 
-The default convention is that any public class is a task. Each task has an entry point, a method with no arguments named "Run". You can use your custom convention like this.
+The default convention is that any public class is a task. Each task has an entry point, a method with no arguments named "Run". If you wnt to define public utility classes (but not tasks) the convention is to end their name with an underscore e.g Utils_ . You can use your custom convention like this.
 
 ```csharp
 
-MakeSharp.Configure
+Make.Configure
             .TasksAre(type =>  /* match */)
             .MethodToExecute(method =>  /* match */);
 
@@ -76,14 +76,31 @@ public class AfterBuild
     public ITaskContext Context {get;set;}    
     public void Run()
     {
-        var result=Context.Data["some_value"].As<string>();
+        var result=Context.Data.GetValue<string>("some_value");
         //do something with result
     }
 }
 
 ```
 
-Injecting _IConfigureTask_ into the task constructor allows you to decide when a task should execute and what are the dependecies for given script arguments. Defining the _ITaskContext_ property allows you to use the context object which gives you access to script arguments and a data dictionary you can use to pass data to other tasks.
+Injecting _IConfigureTask_ into the task constructor allows you to decide when a task should execute and what are the dependecies for given script arguments. Defining the _ITaskContext_ property allows you to use the context object which gives you access to script arguments and a data dictionary you can use to pass data to other tasks. You can also inject any other defined class via constructor or by defining a public property of that type.
+
+```csharp
+public class MyUtils_ {}
+
+public class MyTask
+{
+
+ public MyUtils_ Utils {get;set;}
+ public void Run()
+ {
+  Utils.DoSmth();
+ }
+
+}
+
+```
+
 
 You can have use very own implementation of _IScriptParams_ . Just define it in the script and Make# will use it automatically.
 

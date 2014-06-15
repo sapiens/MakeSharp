@@ -46,7 +46,7 @@ namespace MakeSharp
         private static void Configure(string[] args)
         {
             if (args.Length==1) return;
-            var cfg = MakeSharp.ConfiguratorInstance;
+            var cfg = Make.ConfiguratorInstance;
             cfg.ScriptName = args[1];
             cfg.ScriptArguments = args.Skip(2).ToArray();            
         }

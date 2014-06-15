@@ -12,7 +12,7 @@ namespace MakeSharp
         public ScriptRunner(Assembly asm,MakeSharpConfiguration config=null)
         {
             _asm = asm;
-            _configurator = config??MakeSharp.ConfiguratorInstance;
+            _configurator = config??Make.ConfiguratorInstance;
             FillOverrides();
 
             _context = _configurator.CreateContext(_initObject);

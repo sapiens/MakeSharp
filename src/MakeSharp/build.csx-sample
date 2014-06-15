@@ -8,11 +8,11 @@
 
 /* System ; System.IO; MakeSharp; CavemanTools; Nuget namespaces are included by default, you don't need to include them */
 
-/* By default any public class is a task and each task must have a "Run" method with no arguments.
+/* By default any public class is a task and each task must have a "Run" method with no arguments. A public class ending with _ is considered a poco.
  * You can change the conventions for what type is considered a task 
  * and that method is considered the task entry point with the following code
  */
-//MakeSharp.Configure
+//Make.Configure
 //            .TasksAre(type =>  /* match */)
 //            .MethodToExecute(method =>  /* match */);
 

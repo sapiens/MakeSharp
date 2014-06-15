@@ -1,6 +1,6 @@
 namespace MakeSharp
 {
-    public class MakeSharp
+    public class Make
     {
         internal static MakeSharpConfiguration config= new MakeSharpConfiguration();
 
