@@ -9,7 +9,7 @@
     <projectUrl>https://github.com/sapiens/MakeSharp</projectUrl>
     <licenseUrl>http://www.apache.org/licenses/LICENSE-2.0.html</licenseUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>MakeSharp - Make# - is a straightforward build automation tool for .Net using C# scripts. It's designed to be used in an object oriented manner allowing you to create advanced and reusable build logic </description>
+    <description>MakeSharp - Make# - is a straightforward build automation tool for .Net using C# scripts. It's designed to be used in an object oriented manner allowing you to create advanced and maintainable build logic </description>
     <language>en-US</language>
     <tags>make build makesharp script cs</tags>
  	</metadata>
