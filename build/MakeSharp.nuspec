@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>MakeSharp</id>
+    <version>0.0.1</version>
+    <title>Make#</title>
+    <authors>Mihai Mogosanu</authors>
+    <owners>Mihai Mogosanu</owners>
+    <projectUrl>https://github.com/sapiens/MakeSharp</projectUrl>
+    <licenseUrl>http://www.apache.org/licenses/LICENSE-2.0.html</licenseUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>MakeSharp - Make# - is a straightforward build automation tool for .Net using C# scripts. It's designed to be used in an object oriented manner allowing you to create advanced and reusable build logic </description>
+    <language>en-US</language>
+    <tags>make build makesharp script cs</tags>
+ 	</metadata>
+<files>
+        <file src="MakeSharp\bin\Release\**\*" target="tools"></file>        
+        <file src="MakeSharp.Windows.Helpers\bin\Release\MakeSharp*" target="tools"></file>        
+    </files>
+</package>

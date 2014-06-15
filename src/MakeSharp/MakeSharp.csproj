@@ -30,6 +30,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Release\makesharp.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Autofac">
@@ -92,6 +93,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BuildScript.cs" />
     <Compile Include="DefaultAttribute.cs" />
     <Compile Include="DefaultInitObject.cs" />
     <Compile Include="DependsAttribute.cs" />
@@ -112,6 +114,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ScriptCsHost.cs" />
+    <Compile Include="Solution.cs" />
     <Compile Include="TaskConditionalConfiguration.cs" />
     <Compile Include="TaskConfiguration.cs" />
     <Compile Include="TaskContext.cs" />
@@ -121,6 +124,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="build.cmd-sample">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="build.csx-sample">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

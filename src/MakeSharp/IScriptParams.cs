@@ -4,6 +4,6 @@ namespace MakeSharp
 {
     public interface IScriptParams
     {
-        IDictionary<int,string> ScriptParams { get; set; }
+        IDictionary<int,string> ScriptParams { get; }
     }
 }

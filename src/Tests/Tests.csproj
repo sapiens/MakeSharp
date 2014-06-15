@@ -61,10 +61,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\..\build\build.cs">
-      <Link>build.cs</Link>
-    </Compile>
-    <Compile Include="Class1.cs" />
     <Compile Include="Fixture\IntegrationTasks.cs" />
     <Compile Include="Fixture\MyWrapperClass.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

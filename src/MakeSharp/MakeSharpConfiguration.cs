@@ -17,7 +17,7 @@ namespace MakeSharp
 
         public bool IsTask(Type type)
         {
-            return type.IsNested && _matchType(type);
+            return type.IsNested && !type.DerivesFrom<IScriptParams>() && _matchType(type);
         }
 
         public MethodInfo GetExecutableMethod(Type t)
