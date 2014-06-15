@@ -52,12 +52,12 @@ public class Build
     
     public ITaskContext Context {get;set;}
     
-        public void Run()
+    public void Run()
     {
         if (Context.InitData.ScriptParams[0]=="mono")
         {
         DoMono();        
-       }
+        }
        
        //do some task
        
@@ -83,9 +83,9 @@ public class AfterBuild
 
 ```
 
-Injecting _IConfigureTask_ into the task constructor allows you to decide when a task should execute and what are the dependecies for given script arguments. Defining the _ITaskContext_ property, allows you to use the context object which gives you access to script arguments and a data dictionary you can use to pass data to other tasks.
+Injecting _IConfigureTask_ into the task constructor allows you to decide when a task should execute and what are the dependecies for given script arguments. Defining the _ITaskContext_ property allows you to use the context object which gives you access to script arguments and a data dictionary you can use to pass data to other tasks.
 
-You can have use very own implementation of _IScriptParams_ . Jsut define it in the script and Make# will use it automatically.
+You can have use very own implementation of _IScriptParams_ . Just define it in the script and Make# will use it automatically.
 
 ```csharp
 
@@ -108,12 +108,13 @@ class MyInitObject:IScriptParams
 Make# comes with 3 useful helpers classes as well as [extension methods](https://github.com/sapiens/csake/wiki/Helpers). I strongly suggest to create the scripts using an editor with intellisense. Personally I add a new project, reference MakeSharp.exe and MakeSharp.Windows.Helpers.dll then write the tasks as normal code in Visual Studio. 
 
 * **Solution** 
- * For one solution just set the filename then use the singleton
-   ```
+For one solution just set the filename then use the singleton
+
+```csharp
       Solution.FileName="..\src\myProject.sln";
       //then use it 
       Solution.Instance.FilePath
-   ```
+```
 * **Project** , contains properties and methods to get the release assembly path,  project file path, the semantic version of assembly.
  * If you have only one project you can use the singleton (note that you still need to define the solution file)
 ```
