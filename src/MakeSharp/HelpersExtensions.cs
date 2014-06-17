@@ -2,6 +2,7 @@ using System;
 using System.Diagnostics;
 using System.IO;
 using System.Reflection;
+using log4net.Util;
 using NuGet;
 
 namespace MakeSharp
@@ -100,6 +101,16 @@ namespace MakeSharp
                 Directory.Delete(dirName, true);
             }
             Directory.CreateDirectory(dirName);
+        }
+
+        public static DirectoryInfo ToDirectoryInfo(this string path)
+        {
+            return new DirectoryInfo(path);            
+        }
+
+        public static FileInfo ToFileInfo(this string path)
+        {
+            return new FileInfo(path);
         }
 
         /// <summary>

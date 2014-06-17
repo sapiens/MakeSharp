@@ -35,6 +35,7 @@ namespace MakeSharp
             }
             _solution = solution;
             AssemblyExtension = "dll";
+            ReleaseDirOffset = "";
         }
 
         /// <summary>
@@ -42,7 +43,7 @@ namespace MakeSharp
         /// </summary>
         public string AssemblyExtension { get; set; }
 
-
+        public string ReleaseDirOffset { get; set; }
        
         /// <summary>
         /// Returns csproj file path
@@ -59,15 +60,28 @@ namespace MakeSharp
    
         public string ReleaseDir
         {
-            get { return Path.Combine(Solution.Directory, Name, "bin", "Release"); }
+            get { return Path.Combine(Solution.Directory, Name, "bin", "Release",ReleaseDirOffset); }
+        }
+
+        public string Directory
+        {
+            get { return Path.Combine(Solution.Directory, Name); }
         }
 
         /// <summary>
-        /// Gets path including assembly name and extension
+        /// Gets realease path for project assembly
         /// </summary>
         public string AssemblyReleasePath
         {
-            get { return Path.Combine(ReleaseDir, Name + "." + AssemblyExtension); }
+            get { return ReleasePathForAssembly(); }
+        }
+
+        /// <summary>
+        /// Gets path including for specified asssembly. If not specified, then the project name is used
+        /// </summary>
+        public string ReleasePathForAssembly(string name=null)
+        {
+            return Path.Combine(ReleaseDir,name??(Name + "." + AssemblyExtension)); 
         }
 
         public string Name
@@ -88,7 +102,7 @@ namespace MakeSharp
         /// <returns></returns>
         public string GetAssemblySemanticVersion(string preReleaseSuffix = null, string buildSuffix = null)
         {
-            return AssemblyReleasePath.GetAssemblyVersion().ToSemanticVersion(preReleaseSuffix, buildSuffix).ToString();
+            return ReleasePathForAssembly().GetAssemblyVersion().ToSemanticVersion(preReleaseSuffix, buildSuffix).ToString();
         }
 
         

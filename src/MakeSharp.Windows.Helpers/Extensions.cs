@@ -24,5 +24,15 @@ namespace MakeSharp.Windows.Helpers
             var builder = new MsBuild(project, MsBuild.ConfigurationRelease);
             builder.Build();
         }
+
+        /// <summary>
+        /// Copies files from srcDist to destDir using robocopy.exe (it should be default on any Windows starting with Vista)
+        /// </summary>
+        /// <param name="sourceDir"></param>
+        /// <param name="destDir"></param>
+        public static void Robocopy(this string sourceDir, string destDir)
+        {
+            "robocopy".Exec(sourceDir, destDir, "/E", "/XN", "/NS", "/NC", "/NJH", "/NJS");
+        }
     }
 }
