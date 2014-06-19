@@ -4,6 +4,7 @@ using System.IO;
 
 namespace MakeSharp
 {
+   //todo read csproj file to get additional info . maybe use Microsoft.Build
     public class Project:IEquatable<Project>
     {
         public static string StaticName = "";
@@ -36,6 +37,7 @@ namespace MakeSharp
             _solution = solution;
             AssemblyExtension = "dll";
             ReleaseDirOffset = "";
+            Target = "Release";
         }
 
         /// <summary>
@@ -57,10 +59,31 @@ namespace MakeSharp
 
         private string _name;
         private readonly Solution _solution;
-   
+
+        /// <summary>
+        /// Default is Release
+        /// </summary>
+        public string Target { get; set; }
+
+        /// <summary>
+        /// Gets the specified assembly name's path using current target. If no assembly is specified, the project's name is used
+        /// </summary>
+        /// <param name="assembly"></param>
+        /// <param name="target"></param>
+        /// <returns></returns>
+        public string AssemblyPath(string assembly = null,string target=null)
+        {
+            return Path.Combine(Solution.Directory, Name, "bin",target??Target,ReleaseDirOffset, assembly ?? (Name + "." + AssemblyExtension)); 
+        }
+
         public string ReleaseDir
         {
             get { return Path.Combine(Solution.Directory, Name, "bin", "Release",ReleaseDirOffset); }
+        }
+        
+        public string TargetDir
+        {
+            get { return Path.Combine(Solution.Directory, Name, "bin", Target,ReleaseDirOffset); }
         }
 
         public string Directory
@@ -81,7 +104,8 @@ namespace MakeSharp
         /// </summary>
         public string ReleasePathForAssembly(string name=null)
         {
-            return Path.Combine(ReleaseDir,name??(Name + "." + AssemblyExtension)); 
+            return AssemblyPath(name, "Release");
+            //Path.Combine(ReleaseDir,name??(Name + "." + AssemblyExtension)); 
         }
 
         public string Name
