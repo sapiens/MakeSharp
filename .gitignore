@@ -21,6 +21,8 @@ Packages/
 #Allow NuGet.exe
 !NuGet.exe
 
+/temp/
+
 #Ignore generated nupkg files
 *.nupkg
 # MSTest test Results
