@@ -15,8 +15,14 @@ bld/
 [Bb]in/
 [Oo]bj/
 
-temp/
+#Ignore packages directory
+Packages/
 
+#Allow NuGet.exe
+!NuGet.exe
+
+#Ignore generated nupkg files
+*.nupkg
 # MSTest test Results
 [Tt]est[Rr]esult*/
 [Bb]uild[Ll]og.*
