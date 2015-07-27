@@ -1,8 +1,9 @@
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Reflection;
-using log4net.Util;
+
 using NuGet;
 
 namespace MakeSharp
@@ -233,8 +234,46 @@ namespace MakeSharp
             "Package '{0}' was successfuly created".WriteInfo(nugetFile);
             return nugetFile;
         }
+
+        public static void CreateNuget(this string nuspecTemplate,Action<NuSpecFile> cfgNuspec=null,Action<NugetPackConfig> cfgPacker=null)
+        {
+            var file = nuspecTemplate.AsNuspec();
+            cfgNuspec?.Invoke(file);
+            var packCfg=new NugetPackConfig();
+            cfgPacker?.Invoke(packCfg);
+            var spec=file.Save(packCfg.OutputDir);
+            var args = new List<string>();
+            args.AddRange(new[] { "pack", spec, "-BasePath", packCfg.BasePath, "-OutputDirectory", packCfg.OutputDir });
+            if (packCfg.BuildSymbols) args.Add("-Symbols");
+            packCfg.NugetPath.Exec(args.ToArray());
+
+            var pgk = file.Manifest.Metadata.Id + "." + file.Manifest.Metadata.Version + ".nupkg";
+
+            if (packCfg.Publish)
+            {
+                packCfg.NugetPath.Exec("Push",Path.Combine(packCfg.OutputDir,pgk));
+            }
+        }
     }
 
+    public class NugetPackConfig
+    {
+        /// <summary>
+        /// Path to nuget.exe
+        /// </summary>
+        public string NugetPath { get; set; } = "tools/nuget.exe";
 
+        /// <summary>
+        /// Base path used to include files from solution into package
+        /// </summary>
+        public string BasePath { get; set; } = "./";
+
+        public string OutputDir { get; set; } = "./";
+
+        public bool BuildSymbols { get; set; }
+
+        public bool Publish { get; set; }
+        public string NugetServer { get; set; }
+    }
   
 }

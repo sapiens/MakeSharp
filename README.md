@@ -2,7 +2,7 @@ MakeSharp (make#)
 =================
 Use C# scripts to automate the building process. Powered by [script cs](https://github.com/scriptcs/scriptcs). 
 
-Latest version: **[1.1.0](https://github.com/sapiens/MakeSharp/wiki/ChangeLog)**
+Latest version: **[1.2.0](https://github.com/sapiens/MakeSharp/wiki/ChangeLog)**
 
 License
 ========
@@ -48,15 +48,15 @@ public class Build
 {
     public Build(IConfigureTask cfg)
     {
-        cfg.When(init=>init.ScriptParams[0]=="mono").DependOn<PrepareMono>();
-        cfg.When(init=>init.ScriptParams[0]=="no-build").DontExecute();
+        cfg.When(init=>init.ScriptParams.HasArgument("mono")).DependOn<PrepareMono>();
+        cfg.When(init=>init.ScriptParams.HasArgument("no-build")).DontExecute();
     }
     
     public ITaskContext Context {get;set;}
     
     public void Run()
     {
-        if (Context.InitData.ScriptParams[0]=="mono")
+        if (Context.InitData.ScriptParams.HasArgument("mono"))
         {
         DoMono();        
         }
@@ -124,7 +124,8 @@ class MyInitObject:IScriptParams
 
 ### Helpers
 
-Make# comes with 3 useful helpers classes as well as [extension methods](https://github.com/sapiens/csake/wiki/Helpers). I strongly suggest to create the scripts using an editor with intellisense. Personally I add a new project, reference MakeSharp.exe and MakeSharp.Windows.Helpers.dll then write the tasks as normal code in Visual Studio. 
+Make# comes with 3 useful helpers classes as well as [extension methods](https://github.com/sapiens/csake/wiki/Helpers). I strongly suggest to create the scripts using an editor with intellisense. Personally I have a "Builder" project that I use to write build scripts ofr all my OSS libraries. However most of the time I just change the project name and that's it.
+The Builder is required only when I have to do some project specific stuff.
 
 * **Solution** 
 For one solution just set the filename then use the singleton

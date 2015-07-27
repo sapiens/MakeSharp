@@ -13,7 +13,7 @@ namespace MakeSharp
         
         public static bool HasValue(this IScriptParams init, string value)
         {
-            return init.ScriptParams.Values.Any(d => d == value);
+            return init.RawArguments.Values.Any(d => d == value);
         }
 
         

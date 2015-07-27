@@ -10,7 +10,7 @@ namespace MakeSharp
             init.MustNotBeNull();
             InitData = init;
             Data=new Dictionary<string, object>();
-            Timer = new TaskTimer();
+            Timer = new TaskTimer();                        
         }
 
         public TaskTimer Timer { get; private set; }

@@ -24,6 +24,10 @@ namespace MakeSharp
             }
 
         }
+        /// <summary>
+        /// Names of the project dependencies (used whene generating nuget)
+        /// </summary>
+        public List<string> DepsList { get; private set; }=new List<string>();
 
         public Project(string name, Solution solution = null)
         {
@@ -108,6 +112,8 @@ namespace MakeSharp
             //Path.Combine(ReleaseDir,name??(Name + "." + AssemblyExtension)); 
         }
 
+        
+
         public string Name
         {
             get { return _name; }
@@ -140,5 +146,11 @@ namespace MakeSharp
         {
             return Equals(obj as Project);
         }
+
+        public AssemblyInfoFile GetAssemblyInfo()
+        {
+            return new AssemblyInfoFile(Path.Combine(Directory,"Properties","AssemblyInfo.cs"));
+        }
+        
     }
 }

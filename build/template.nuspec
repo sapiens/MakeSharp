@@ -14,7 +14,6 @@
     <tags>make build makesharp scriptcs</tags>
  	</metadata>
 <files>
-        <!-- <file src="MakeSharp\bin\Release\**\*" target="tools"></file>      -->
-        <file src="MakeSharp.Windows.Helpers\bin\Release\**\*" target="tools"></file>        
+        <file src="bin\Release\**\*" target="tools"></file>        
     </files>
 </package>

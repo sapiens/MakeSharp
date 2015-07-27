@@ -55,8 +55,9 @@ namespace MakeSharp
                 if (typeConfig==null)throw new InvalidOperationException("Can't find task '{0}'".ToFormat(deps[i].Name));
                 execDeps[i] = GetExecutor(typeConfig, context);
             }
-
+            if (!config.ShouldExecute(context.InitData)) return TaskExecutor.SkipTask;
             var method = _configuration.GetExecutableMethod(config.Type);
+            
             return new TaskExecutor(config.Instance,method,execDeps);
         }
     }

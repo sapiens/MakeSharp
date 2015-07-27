@@ -25,7 +25,8 @@ namespace Tests
             var init = Setup.FakeScriptParamsObject();
             
             sut.ShouldExecute(init).Should().BeTrue();
-            init.ScriptParams[0] = "skip";
+            
+            init.RawArguments[0] = "skip";
             sut.ShouldExecute(init).Should().BeFalse();
         }
     }

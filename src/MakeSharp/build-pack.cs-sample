@@ -1,27 +1,28 @@
+#r "..\src\packages\MakeSharp.1.3.0\tools\MakeSharp.Windows.Helpers.dll"
 using System;
 using System.Collections.Generic;
 using System.Reflection;
 using CavemanTools;
 using MakeSharp;
-using MakeSharp.MsBuild;
-using NuGet;
-using CavemanTools.Logging;
+using MakeSharp.Windows.Helpers;
+
+
 //class h
 //{
 //    void b()
 //    {
-        Project.StaticName = "MakeSharp";
-        
+
+//script has arguments: v=[version] [push]
+//push is to publish nugets
+
+        Project.StaticName = "____";
         Solution.FileName = @"..\src\"+Project.StaticName+".sln";  
-        //Solution.FileName = @"..\src\MakeSharp.sln";  
-        //Solution.Instance.AddProjects("MakeSharp","MakeSharp.Windows.Helpers");
-
-
-       
+        
+		Project.Current.DepsList.Add("CavemanTools");
     
         
 		Project.Current.AssemblyExtension = "dll";
-       LogManager.OutputToConsole();
+
 
 //    }
 //}
@@ -32,8 +33,7 @@ public class clean
  {
      public void Run()
      {
-
-	  BuildScript.TempDirectory.CleanupDir();
+        BuildScript.TempDirectory.CleanupDir();
       
       Solution.Instance.FilePath.MsBuildClean();
     }
@@ -53,12 +53,9 @@ public class UpdateVersion
             return;
         }
         var info = Project.Current.GetAssemblyInfo();
-       
-       
         info.Info.Version = info.Info.FileVersion = ver;
         info.Save();
-      
-        ("Version updated to "+ver).ToConsole();
+       ("Version updated to "+ver).ToConsole();
         Context.Data["version"] = ver;
     }
 
@@ -109,7 +106,7 @@ public class pack
             p.OutputDir = BuildScript.TempDirName;
             p.BasePath = Project.Current.Directory;
           
-            p.BuildSymbols = false;
+            p.BuildSymbols = true;
             p.Publish = Context.InitData.HasArgument("push");
 
         });

@@ -1,6 +1,6 @@
 using System.Collections.Specialized;
 
-namespace MakeSharp.Windows.Helpers
+namespace MakeSharp.MsBuild
 {
     public static class Extensions
     {

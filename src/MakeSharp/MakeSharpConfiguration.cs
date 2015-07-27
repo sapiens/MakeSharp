@@ -31,7 +31,7 @@ namespace MakeSharp
         {
             Debug.Assert(Context==null);
             var context = new TaskContext(init);
-            context.RequestedTask = ScriptName;
+            context.RequestedTask = TaskName;
             Context = context;
             return context;
         }
@@ -39,7 +39,7 @@ namespace MakeSharp
         public TaskContext Context { get; private set; }
 
 
-        public string ScriptName { get; set; }
+        public string TaskName { get; set; }
         public string[] ScriptArguments { get; set; }
 
         public IConfigureMakeSharp TasksAre(Func<Type, bool> matchType)
@@ -56,4 +56,14 @@ namespace MakeSharp
             return this;
         }
     }
+
+    public static class _
+    {
+
+        public static void Config(Action action)
+        {
+            action();
+        }
+    }
+
 }

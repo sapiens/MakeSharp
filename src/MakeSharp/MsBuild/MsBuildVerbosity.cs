@@ -1,4 +1,4 @@
-﻿namespace MakeSharp.Windows.Helpers
+﻿namespace MakeSharp.MsBuild
 {
 
     public enum MsBuildVerbosity

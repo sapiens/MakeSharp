@@ -8,6 +8,7 @@ using NuGet;
 using ScriptCs;
 using ScriptCs.Contracts;
 using ScriptCs.Engine.Roslyn;
+using ScriptCs.Hosting;
 
 namespace MakeSharp
 {
@@ -33,7 +34,7 @@ namespace MakeSharp
         {
             _exec.AddReferences(typeof(Percentage));
             _exec.AddReferenceAndImportNamespaces(new []{typeof(PackageBuilder),GetType(),typeof(RequiredAttribute)});
-            _exec.ImportNamespaces( "System.Linq", "CavemanTools");
+            _exec.ImportNamespaces( "System.Linq", "CavemanTools","MakeSharp.MsBuild");
 
             _exec.Initialize(new string[0], new IScriptPack[0]);            
             return _exec.ExecuteScript(GetScriptContent(script));

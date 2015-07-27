@@ -12,7 +12,7 @@ namespace MakeSharp
             WriteHeader();
             if (args.Length == 0)
             {
-                "Usage: makesharp script_name [task_name] [arg0] [arg1] [...]".ToConsole();
+                "Usage: makesharp script_name [task_name] [arg0=value] [arg1=value] [...]".ToConsole();
                 return 0;
             }
 
@@ -30,8 +30,10 @@ namespace MakeSharp
             var result = host.Execute(file);
             if (result.CompileExceptionInfo != null) Console.WriteLine(result.CompileExceptionInfo.SourceException);
             if (result.ExecuteExceptionInfo != null) Console.WriteLine(result.ExecuteExceptionInfo.SourceException);
-            
-           // Console.ReadKey();
+//#if DEBUG
+       // Console.ReadKey();
+//#endif
+
             return 0;
         }
 
@@ -47,7 +49,7 @@ namespace MakeSharp
         {
             if (args.Length==1) return;
             var cfg = Make.ConfiguratorInstance;
-            cfg.ScriptName = args[1];
+            cfg.TaskName = args[1];
             cfg.ScriptArguments = args.Skip(2).ToArray();            
         }
     }

@@ -24,9 +24,9 @@ namespace Tests.Fixture
                 cfg.Always
                     .DependOn<Clean>()
                     .DependOn<Dummy>();
-
-                cfg.When(p => p.HasValue("skip"))
-                    .DontExecute();
+               
+               cfg.When(p => p.HasValue("skip"))
+                   .DontExecute();
             }
 
             public void Execute() { }

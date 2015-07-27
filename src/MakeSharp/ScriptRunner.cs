@@ -40,11 +40,14 @@ csRun.Do();
                 _initObject=new DefaultInitObject();
             }
             var i = 0;
+   
             _configurator.ScriptArguments.ForEach(d =>
             {
-                _initObject.ScriptParams[i] = d;
+                _initObject.RawArguments[i] = d;
                 i++;
             });
+
+            
 
         }
 

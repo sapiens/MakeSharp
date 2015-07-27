@@ -3,9 +3,8 @@ using System.Collections.Specialized;
 using System.Diagnostics;
 using System.IO;
 using System.Text;
-using Microsoft.Win32;
 
-namespace MakeSharp.Windows.Helpers
+namespace MakeSharp.MsBuild
 {
     public class MsBuild
     {
@@ -13,17 +12,26 @@ namespace MakeSharp.Windows.Helpers
         private readonly NameValueCollection _properties;
         private readonly MsBuildVerbosity _verbosity;
 
+        /// <summary>
+        /// 12.0 (VS 2013) or 14.0 (VS 2015)
+        /// </summary>
+        public static string Version = "14.0";
+
+        public static bool Is64Bit = true;
+
         static string Parse(MsBuildVerbosity verbosity)
         {
             return verbosity.ToString().ToLowerInvariant();
         }
         static string GetExePath()
         {
-            var version = Environment.Version;
-            var key = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\MSBuild\ToolsVersions\" + version.Major + "." + version.Minor);
-            var path = key.GetValue("MSBuildToolsPath") as string;
-            key.Dispose();
-            return Path.Combine(path, "MSBuild.exe");
+            var program_files = Is64Bit ? "Program Files (x86)" : "Program Files";
+            return Path.Combine("C:", program_files, "MSBuild", Version, @"Bin\MSBuild.exe");
+            //var version = Environment.Version;
+            //var key = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\MSBuild\ToolsVersions\" + version.Major + "." + version.Minor);
+            //var path = key.GetValue("MSBuildToolsPath") as string;
+            //key.Dispose();
+            //return Path.Combine(path, "MSBuild.exe");
         }
 
         private static string path;
@@ -37,6 +45,9 @@ namespace MakeSharp.Windows.Helpers
                 {
                     path = GetExePath();
                 }
+#if DEBUG
+                $"using {path}".WriteInfo();
+#endif
                 return path;
             }
         }

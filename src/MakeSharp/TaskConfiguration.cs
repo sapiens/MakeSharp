@@ -38,7 +38,7 @@ namespace MakeSharp
 
         public bool ShouldExecute(IScriptParams init)
         {
-            var dont = _configurations.Where(d => d.AppliesTo(init) && !d.ShouldExecute).FirstOrDefault();
+            var dont = _configurations.FirstOrDefault(d => d.AppliesTo(init) && !d.ShouldExecute);
             return dont == null;
         }
 
