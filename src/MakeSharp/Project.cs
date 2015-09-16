@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Dynamic;
 using System.IO;
 
 namespace MakeSharp
@@ -118,6 +119,10 @@ namespace MakeSharp
         {
             get { return _name; }
         }
+
+        public dynamic Bag { get; }=new ExpandoObject();
+
+        public IDictionary<string,object> Data { get; }=new Dictionary<string, object>();
 
         public Solution Solution
         {

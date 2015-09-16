@@ -1,4 +1,5 @@
 using System.Linq;
+using CavemanTools;
 
 namespace MakeSharp
 {
@@ -7,6 +8,21 @@ namespace MakeSharp
         public string Version { get; set; }
 
         public string FileVersion { get; set; }
+
+        public void BumpMinorVersion()
+        {
+            var semver=new SemanticVersion(Version);
+            var newVer=new SemanticVersion(semver.Major,semver.Minor+1,build:null,preRelease:null);
+            Version = FileVersion = newVer.ToString();
+        }
+
+        public void BumpPatchVersion()
+        {
+           
+            var semver = new SemanticVersion(Version);
+            var newVer = new SemanticVersion(semver.Major, semver.Minor, semver.Patch+1,build:null, preRelease: null);
+            Version = FileVersion = newVer.ToString();
+        }
 
         internal static string[] GetNames()
         {

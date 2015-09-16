@@ -47,10 +47,12 @@ public class UpdateVersion
     public void Run()
     {
         var ver = Context.InitData.Get<string>("v");
-        if (ver == null)
+		if (ver == null)
         {
-            GetVersion();
-            return;
+			//bump=minor|patch
+			var bump=Context.InitData.Get<string>("bump");			
+			ver=GetVersion(bump);
+			if (bump==null) return;
         }
         var info = Project.Current.GetAssemblyInfo();
        
@@ -62,11 +64,14 @@ public class UpdateVersion
         Context.Data["version"] = ver;
     }
 
-    void GetVersion()
+    string GetVersion(string bump=null)
     {
         var info=Project.Current.GetAssemblyInfo();
-        Context.Data["version"] = info.Info.Version;
+		if (bump=="minor") info.Info.BumpMinorVersion();
+		if (bump=="patch") info.Info.BumpPatchVersion();
+		Context.Data["version"] = info.Info.Version;
         ("Using version "+info.Info.Version).ToConsole();
+		return info.Info.Version;
     }
 }
 

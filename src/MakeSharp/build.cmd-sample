@@ -1,4 +1,4 @@
 @echo off
 rem "[path to]\packages\MakeSharp[version number]\tools\makesharp.exe" build.cs %* 
-"..\src\packages\MakeSharp.1.2.0\tools\makesharp.exe" build.cs %*
+"..\src\packages\MakeSharp.1.2.3\tools\makesharp.exe" build.cs %*
 pause

@@ -44,7 +44,7 @@ namespace MakeSharp
         {
             var idx = source.IndexOf('"');
             var last = source.IndexOf('"', idx + 1);
-            return source.Substring(idx + 1, last - idx);
+            return source.Substring(idx + 1, last - idx).TrimEnd('"');
         }
 
         public void Save()
