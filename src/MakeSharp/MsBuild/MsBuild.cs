@@ -26,12 +26,7 @@ namespace MakeSharp.MsBuild
         static string GetExePath()
         {
             var program_files = Is64Bit ? "Program Files (x86)" : "Program Files";
-            return Path.Combine("C:", program_files, "MSBuild", Version, @"Bin\MSBuild.exe");
-            //var version = Environment.Version;
-            //var key = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\MSBuild\ToolsVersions\" + version.Major + "." + version.Minor);
-            //var path = key.GetValue("MSBuildToolsPath") as string;
-            //key.Dispose();
-            //return Path.Combine(path, "MSBuild.exe");
+            return "\""+Path.Combine("C:\\", program_files, "MSBuild", Version, @"Bin\MSBuild.exe")+"\"";            
         }
 
         private static string path;
