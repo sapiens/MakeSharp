@@ -2,7 +2,7 @@ MakeSharp (make#)
 =================
 Use C# scripts to automate the building process. Powered by [script cs](https://github.com/scriptcs/scriptcs). 
 
-Latest version: **[1.2.0](https://github.com/sapiens/MakeSharp/wiki/ChangeLog)**
+Latest version: **[1.3.0](https://github.com/sapiens/MakeSharp/wiki/ChangeLog)**
 
 License
 ========
