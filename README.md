@@ -1,3 +1,5 @@
+# No longer maintained
+
 MakeSharp (make#)
 =================
 Use C# scripts to automate the building process. Powered by [script cs](https://github.com/scriptcs/scriptcs). 
