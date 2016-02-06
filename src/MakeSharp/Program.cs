@@ -23,16 +23,16 @@ namespace MakeSharp
                 return 1;
             }
 
-          
+
             Configure(args);
 
             var host = new ScriptCsHost();
             var result = host.Execute(file);
             if (result.CompileExceptionInfo != null) Console.WriteLine(result.CompileExceptionInfo.SourceException);
             if (result.ExecuteExceptionInfo != null) Console.WriteLine(result.ExecuteExceptionInfo.SourceException);
-//#if DEBUG
-       // Console.ReadKey();
-//#endif
+            //#if DEBUG
+            // Console.ReadKey();
+            //#endif
 
             return 0;
         }
@@ -47,10 +47,10 @@ namespace MakeSharp
 
         private static void Configure(string[] args)
         {
-            if (args.Length==1) return;
+            if (args.Length == 1) return;
             var cfg = Make.ConfiguratorInstance;
             cfg.TaskName = args[1];
-            cfg.ScriptArguments = args.Skip(2).ToArray();            
+            cfg.ScriptArguments = args.Skip(2).ToArray();
         }
     }
 }
